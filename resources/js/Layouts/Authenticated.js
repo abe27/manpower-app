@@ -36,9 +36,27 @@ const classNames = (...classes) => {
   return classes.filter(Boolean).join(' ')
 }
 
-const loopMenu = (i) => (<>
-  <h1>Test</h1>
-</>);
+const checkChildren = (item) => {
+  if (item.children.length > 0) {
+    return <MenuDropdown key={item.name} MenuTitle={item.name} MenuNavigation={item.children} />
+  }
+
+  return (
+    <a
+      key={item.name}
+      href={item.href}
+      className={classNames(
+        route().current(item.current)
+          ? 'bg-gray-900 text-white'
+          : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+        'px-3 py-2 rounded-md text-sm font-medium'
+      )}
+      aria-current={route().current(item.current) ? 'page' : undefined}
+    >
+      {item.name}
+    </a>
+  );
+};
 
 const Authenticated = ({ auth, header, children }) => {
   return (
@@ -60,23 +78,7 @@ const Authenticated = ({ auth, header, children }) => {
                     </div>
                     <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">
-                        {navigation.map((item) => (
-                          <a
-                            key={item.name}
-                            href={item.href}
-                            className={classNames(
-                              route().current(item.current)
-                                ? 'bg-gray-900 text-white'
-                                : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                              'px-3 py-2 rounded-md text-sm font-medium'
-                            )}
-                            aria-current={item.current ? 'page' : undefined}
-                          >
-                            {item.name}
-                            <strong>{auth.firstname}</strong>
-                          </a>
-                        ))}
-                        <MenuDropdown />
+                        {navigation.map((item) => checkChildren(item))}
                       </div>
                     </div>
                   </div>

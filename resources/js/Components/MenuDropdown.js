@@ -2,18 +2,21 @@ import React from 'react';
 import { Button, Menu, MenuButton, MenuList, MenuItem, MenuItemOption, MenuGroup, MenuOptionGroup, MenuDivider, } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 
-const MenuDropdown = () => (
+const MenuDropdown = ({ MenuTitle, MenuNavigation }) => (
   <>
-    <Menu>
-      <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-        Actions
+    <Menu isLazy>
+      <MenuButton className="text-gray-300 hover:bg-gray-700 hover:text-white">
+        {MenuTitle}
       </MenuButton>
       <MenuList>
-        <MenuItem>Download</MenuItem>
-        <MenuItem>Create a Copy</MenuItem>
-        <MenuItem>Mark as Draft</MenuItem>
-        <MenuItem>Delete</MenuItem>
-        <MenuItem>Attend a Workshop</MenuItem>
+        {MenuNavigation.map(i => (
+          <MenuItem href="/">{i.name}</MenuItem>
+        ))}
+        <MenuDivider />
+        <MenuGroup title='Help'>
+          <MenuItem>Docs</MenuItem>
+          <MenuItem>FAQ</MenuItem>
+        </MenuGroup>
       </MenuList>
     </Menu>
   </>
