@@ -17,12 +17,14 @@ const navigation = [
   { name: 'Training', href: '#', current: 'training', children: [] },
   { name: 'Evaluation', href: '#', current: 'evaluation', children: [] },
   { name: 'Reports', href: '#', current: 'reporting', children: [] },
-  { name: 'Administrator', href: route('admin.index'), current: 'admin.index', children: [
-    {name: 'A', href: "#"},
-    {name: 'B', href: "#"},
-    {name: 'C', href: "#"},
-    {name: 'D', href: "#"},
-  ] },
+  {
+    name: 'Administrator', href: route('admin.index'), current: 'admin.index', children: [
+      { name: 'A', href: "#" },
+      { name: 'B', href: "#" },
+      { name: 'C', href: "#" },
+      { name: 'D', href: "#" },
+    ]
+  },
 ]
 const userNavigation = [
   { name: 'Your Profile', href: '#' },
@@ -34,24 +36,8 @@ const classNames = (...classes) => {
   return classes.filter(Boolean).join(' ')
 }
 
-const loopMenu = (auth) => (<>
-  {navigation.map((item) => (
-    {item.children.length > 0 &&(<a
-      key={item.name}
-      href={item.href}
-      className={classNames(
-        route().current(item.current)
-          ? 'bg-gray-900 text-white'
-          : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-        'px-3 py-2 rounded-md text-sm font-medium'
-      )}
-      aria-current={item.current ? 'page' : undefined}
-    >
-      {item.name}
-      <strong>{auth.firstname}</strong>
-    </a>)}
-
-  ))}
+const loopMenu = (i) => (<>
+  <h1>Test</h1>
 </>);
 
 const Authenticated = ({ auth, header, children }) => {
@@ -74,7 +60,22 @@ const Authenticated = ({ auth, header, children }) => {
                     </div>
                     <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">
-                        {loopMenu(auth)}
+                        {navigation.map((item) => (
+                          <a
+                            key={item.name}
+                            href={item.href}
+                            className={classNames(
+                              route().current(item.current)
+                                ? 'bg-gray-900 text-white'
+                                : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                              'px-3 py-2 rounded-md text-sm font-medium'
+                            )}
+                            aria-current={item.current ? 'page' : undefined}
+                          >
+                            {item.name}
+                            <strong>{auth.firstname}</strong>
+                          </a>
+                        ))}
                         <MenuDropdown />
                       </div>
                     </div>
