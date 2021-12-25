@@ -19,10 +19,18 @@ const navigation = [
   { name: 'Reports', href: '#', current: 'reporting', children: [] },
   {
     name: 'Administrator', href: route('admin.index'), current: 'admin.index', children: [
-      { name: 'A', href: "#" },
-      { name: 'B', href: "#" },
-      { name: 'C', href: "#" },
-      { name: 'D', href: "#" },
+      {
+        name: 'จัดการข้อมูลหน่วยงาน', href: "#", current: 'a', is_group: true, children: [
+          { name: 'A', href: "#", current: 'a', is_group: false, children: [] },
+          { name: 'B', href: "#", current: 'b', is_group: false, children: [] },
+        ]
+      },
+      {
+        name: 'Group B', href: "#", current: 'c', is_group: true, children: [
+          { name: 'C', href: "#", current: 'd', is_group: false, children: [] },
+          { name: 'D', href: "#", current: 'd', is_group: false, children: [] },
+        ]
+      },
     ]
   },
 ]
