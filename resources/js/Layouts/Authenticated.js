@@ -4,6 +4,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { BellIcon, MenuIcon, XIcon, MailIcon } from '@heroicons/react/outline';
 import { Head } from '@inertiajs/inertia-react';
 import { ChakraProvider } from '@chakra-ui/react';
+import MenuDropdown from '@/Components/MenuDropdown';
 
 const user = {
   name: 'Tom Cook',
@@ -11,12 +12,17 @@ const user = {
   imageUrl: "https://i.pravatar.cc/500",
 }
 const navigation = [
-  { name: 'Dashboard', href: route('dashboard'), current: 'dashboard' },
-  { name: 'Employee', href: '#', current: 'employee' },
-  { name: 'Training', href: '#', current: 'training' },
-  { name: 'Evaluation', href: '#', current: 'evaluation' },
-  { name: 'Reports', href: '#', current: 'reporting' },
-  { name: 'Administrator', href: route('admin.index'), current: 'admin.index' },
+  { name: 'Dashboard', href: route('dashboard'), current: 'dashboard', children: [] },
+  { name: 'Employee', href: '#', current: 'employee', children: [] },
+  { name: 'Training', href: '#', current: 'training', children: [] },
+  { name: 'Evaluation', href: '#', current: 'evaluation', children: [] },
+  { name: 'Reports', href: '#', current: 'reporting', children: [] },
+  { name: 'Administrator', href: route('admin.index'), current: 'admin.index', children: [
+    {name: 'A', href: "#"},
+    {name: 'B', href: "#"},
+    {name: 'C', href: "#"},
+    {name: 'D', href: "#"},
+  ] },
 ]
 const userNavigation = [
   { name: 'Your Profile', href: '#' },
@@ -27,6 +33,26 @@ const userNavigation = [
 const classNames = (...classes) => {
   return classes.filter(Boolean).join(' ')
 }
+
+const loopMenu = (auth) => (<>
+  {navigation.map((item) => (
+    {item.children.length > 0 &&(<a
+      key={item.name}
+      href={item.href}
+      className={classNames(
+        route().current(item.current)
+          ? 'bg-gray-900 text-white'
+          : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+        'px-3 py-2 rounded-md text-sm font-medium'
+      )}
+      aria-current={item.current ? 'page' : undefined}
+    >
+      {item.name}
+      <strong>{auth.firstname}</strong>
+    </a>)}
+
+  ))}
+</>);
 
 const Authenticated = ({ auth, header, children }) => {
   return (
@@ -48,22 +74,8 @@ const Authenticated = ({ auth, header, children }) => {
                     </div>
                     <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">
-                        {navigation.map((item) => (
-                          <a
-                            key={item.name}
-                            href={item.href}
-                            className={classNames(
-                              route().current(item.current)
-                                ? 'bg-gray-900 text-white'
-                                : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                              'px-3 py-2 rounded-md text-sm font-medium'
-                            )}
-                            aria-current={item.current ? 'page' : undefined}
-                          >
-                            {item.name}
-                            <strong>{auth.firstname}</strong>
-                          </a>
-                        ))}
+                        {loopMenu(auth)}
+                        <MenuDropdown />
                       </div>
                     </div>
                   </div>
@@ -196,7 +208,6 @@ const Authenticated = ({ auth, header, children }) => {
 
         <main className="py-4">
           <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            {route().current()}
             {children}
           </div>
         </main>
