@@ -6,7 +6,7 @@ import TableComponent from '@/Components/Table';
 import ElementLoading from '@/Components/ElementLoading';
 import { Button, useDisclosure } from '@chakra-ui/react';
 import { AddIcon } from '@chakra-ui/icons';
-import ModalDialog from '@/Components/ModalDialog';
+import ModalDialogInput from '@/Components/ModalDialogInput';
 
 const breadData = [
   { id: nanoid(), name: 'Home', href: "#", current: false },
@@ -44,7 +44,7 @@ const SectionIndexPage = (props) => {
         {(!TableHeader) && <ElementLoading />}
         {(TableHeader) && <TableComponent Theader={TableHeader} TableData={props.data} />}
       </div>
-      <ModalDialog isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>
+      <ModalDialogInput title="เพิ่มข้อมูล" isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
     </Authenticated>
   );
 };
