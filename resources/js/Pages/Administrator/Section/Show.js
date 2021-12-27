@@ -44,7 +44,7 @@ const SectionIndexPage = (props) => {
         {(!TableHeader) && <ElementLoading />}
         {(TableHeader) && <TableComponent Theader={TableHeader} TableData={props.data} />}
       </div>
-      <ModalDialogInput title="เพิ่มข้อมูล" isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
+      <ModalDialogInput title="เพิ่มข้อมูล" isOpen={isOpen} onOpen={onOpen} onClose={onClose} routeLink={route('admin.section.store')} />
     </Authenticated>
   );
 };

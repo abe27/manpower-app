@@ -34,6 +34,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/', [AdministratorController::class, 'index'])->name('admin.index');
         Route::prefix('/section')->group(function () {
             Route::get('/', [SectionController::class, 'index'])->name('admin.section.get');
+            Route::post('/', [SectionController::class, 'store'])->name('admin.section.store');
         });
 
         Route::prefix('/department')->group(function () {

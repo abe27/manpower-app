@@ -40,7 +40,13 @@ class SectionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Section::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'is_status' => $request->is_status
+        ]);
+
+        return redirect()->route('admin.section.get');
     }
 
     /**
