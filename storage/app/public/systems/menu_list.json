@@ -1,0 +1,111 @@
+[
+  {
+    "name": "หน้าแรก",
+    "href": "dashboard",
+    "current": "dashboard",
+    "children": []
+  },
+  {
+    "name": "พนักงาน",
+    "href": "welcome",
+    "current": "employee",
+    "children": []
+  },
+  {
+    "name": "อบรม",
+    "href": "welcome",
+    "current": "training",
+    "children": []
+  },
+  {
+    "name": "ประเมินพนักงาน",
+    "href": "welcome",
+    "current": "evaluation",
+    "children": []
+  },
+  {
+    "name": "กิจกรรม 5ส.",
+    "href": "welcome",
+    "current": "reporting",
+    "children": []
+  },
+  {
+    "name": "อุบัติเหตุ",
+    "href": "welcome",
+    "current": "reporting",
+    "children": []
+  },
+  {
+    "name": "ผู้ดูแลระบบ",
+    "href": "admin.index",
+    "current": "admin.index",
+    "children": [
+      {
+        "name": "จัดการข้อมูลหน่วยงาน",
+        "href": "welcome",
+        "current": "a",
+        "is_group": true,
+        "children": [
+          {
+            "name": "Section",
+            "href": "admin.index",
+            "current": "a",
+            "is_group": false,
+            "children": []
+          },
+          {
+            "name": "Department",
+            "href": "welcome",
+            "current": "b",
+            "is_group": false,
+            "children": []
+          },
+          {
+            "name": "Position",
+            "href": "welcome",
+            "current": "b",
+            "is_group": false,
+            "children": []
+          }
+        ]
+      },
+      {
+        "name": "จัดการข้อมูลการทำงาน",
+        "href": "welcome",
+        "current": "c",
+        "is_group": true,
+        "children": [
+          {
+            "name": "Shiftment",
+            "href": "welcome",
+            "current": "d",
+            "is_group": false,
+            "children": []
+          },
+          {
+            "name": "Organization",
+            "href": "welcome",
+            "current": "d",
+            "is_group": false,
+            "children": []
+          }
+        ]
+      },
+      {
+        "name": "จัดการข้อมูลคลังสินค้า",
+        "href": "welcome",
+        "current": "c",
+        "is_group": true,
+        "children": [
+          {
+            "name": "Whs",
+            "href": "welcome",
+            "current": "d",
+            "is_group": false,
+            "children": []
+          }
+        ]
+      }
+    ]
+  }
+]
