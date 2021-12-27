@@ -1,11 +1,18 @@
 import React from 'react';
-import { Button, Menu, MenuButton, MenuList, MenuItem, MenuItemOption, MenuGroup, MenuOptionGroup, MenuDivider, } from '@chakra-ui/react';
-import { Icon, ChevronDownIcon } from '@chakra-ui/icons';
+import { Menu, MenuButton, MenuList, MenuItem, MenuGroup, MenuDivider, } from '@chakra-ui/react';
+import { Icon, ChevronDownIcon, ChevronRightIcon } from '@chakra-ui/icons';
 
-const MenuDropdown = ({ MenuTitle, MenuNavigation }) => (
+const classNames = (...classes) => {
+  return classes.filter(Boolean).join(' ')
+}
+
+const MenuDropdown = ({ MenuHref, MenuTitle, MenuNavigation }) => (
   <>
     <Menu isLazy>
-      <MenuButton className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+      <MenuButton className={classNames(
+        route().current(MenuHref) ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+        'block px-3 py-2 rounded-md text-base font-medium'
+      )}>
         <div className="">
           {MenuTitle}
           &nbsp;
@@ -18,8 +25,9 @@ const MenuDropdown = ({ MenuTitle, MenuNavigation }) => (
             <section key={i.id}>
               <MenuGroup title={i.name}>
                 {i.children && i.children.map(x => (
-                  <MenuItem key={x.id} className="text-sm font-medium">
-                    <a href={x.href}>{x.name}</a>
+                  <MenuItem key={x.id}>
+                    <Icon as={ChevronRightIcon} />
+                    <a href={x.href} className="text-sm font-medium">{x.name}</a>
                   </MenuItem>
                 ))}
               </MenuGroup>

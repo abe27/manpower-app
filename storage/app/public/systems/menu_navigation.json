@@ -1,0 +1,5 @@
+[
+  { "name": "ข้อมูลส่วนตัว", "href": "welcome" },
+  { "name": "ตั้งค่าระบบ", "href": "admin.index" },
+  { "name": "ออกจากระบบ", "href": "logout" }
+]

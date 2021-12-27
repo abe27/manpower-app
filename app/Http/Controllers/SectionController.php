@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Section;
+use Inertia\Inertia;
 use Illuminate\Http\Request;
 
 class SectionController extends Controller
@@ -14,7 +15,11 @@ class SectionController extends Controller
      */
     public function index()
     {
-        //
+        $data = Section::paginate(15);
+        $obj = [
+            'data' => $data,
+        ];
+        return Inertia::render('Administrator/Section/Show', $obj);
     }
 
     /**

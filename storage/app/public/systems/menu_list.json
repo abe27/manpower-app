@@ -47,23 +47,30 @@
         "is_group": true,
         "children": [
           {
-            "name": "Section",
-            "href": "admin.index",
+            "name": "ข้อมูลหน่วยงาน",
+            "href": "admin.section.get",
             "current": "a",
             "is_group": false,
             "children": []
           },
           {
-            "name": "Department",
-            "href": "welcome",
+            "name": "ข้อมูลแผนก",
+            "href": "admin.department.get",
             "current": "b",
             "is_group": false,
             "children": []
           },
           {
-            "name": "Position",
-            "href": "welcome",
+            "name": "ข้อมูลตำแหน่ง",
+            "href": "admin.position.get",
             "current": "b",
+            "is_group": false,
+            "children": []
+          },
+          {
+            "name": "ข้อมูลองค์กร",
+            "href": "welcome",
+            "current": "d",
             "is_group": false,
             "children": []
           }
@@ -76,14 +83,7 @@
         "is_group": true,
         "children": [
           {
-            "name": "Shiftment",
-            "href": "welcome",
-            "current": "d",
-            "is_group": false,
-            "children": []
-          },
-          {
-            "name": "Organization",
+            "name": "ข้อมูลการเข้างาน",
             "href": "welcome",
             "current": "d",
             "is_group": false,
@@ -98,7 +98,73 @@
         "is_group": true,
         "children": [
           {
-            "name": "Whs",
+            "name": "ข้อมูลคลังสินค้า",
+            "href": "welcome",
+            "current": "d",
+            "is_group": false,
+            "children": []
+          }
+        ]
+      },
+      {
+        "name": "จัดการข้อมูลภูมิภาค",
+        "href": "welcome",
+        "current": "c",
+        "is_group": true,
+        "children": [
+          {
+            "name": "ข้อมูลจังหวัด",
+            "href": "welcome",
+            "current": "d",
+            "is_group": false,
+            "children": []
+          },
+          {
+            "name": "ข้อมูลอำเภอ",
+            "href": "welcome",
+            "current": "d",
+            "is_group": false,
+            "children": []
+          },
+          {
+            "name": "ข้อมูลรหัสไปรษณีย์",
+            "href": "welcome",
+            "current": "d",
+            "is_group": false,
+            "children": []
+          }
+        ]
+      },
+      {
+        "name": "จัดการข้อมูลระบบ",
+        "href": "welcome",
+        "current": "c",
+        "is_group": true,
+        "children": [
+          {
+            "name": "ข้อมูลสิทธ์การเข้าใช้งาน",
+            "href": "welcome",
+            "current": "d",
+            "is_group": false,
+            "children": []
+          },
+          {
+            "name": "ข้อมูลประเภทการลา",
+            "href": "welcome",
+            "current": "d",
+            "is_group": false,
+            "children": []
+          }
+        ]
+      },
+      {
+        "name": "จัดการข้อมูลประชาสัมพันธ์",
+        "href": "welcome",
+        "current": "c",
+        "is_group": true,
+        "children": [
+          {
+            "name": "ข้อมูลหมวดหมู่",
             "href": "welcome",
             "current": "d",
             "is_group": false,

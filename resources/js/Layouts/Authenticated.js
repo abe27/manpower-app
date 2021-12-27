@@ -14,19 +14,13 @@ const user = {
   imageUrl: "https://i.pravatar.cc/500",
 }
 
-const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: route('logout') },
-]
-
 const classNames = (...classes) => {
   return classes.filter(Boolean).join(' ')
 }
 
 const checkChildren = (item) => {
   if (item.children.length > 0) {
-    return <MenuDropdown key={item.id} MenuTitle={item.name} MenuNavigation={item.children} />
+    return <MenuDropdown key={item.id} MenuHref={item.href} MenuTitle={item.name} MenuNavigation={item.children} />
   }
 
   return (
@@ -48,6 +42,7 @@ const checkChildren = (item) => {
 
 const Authenticated = ({ auth, header, children }) => {
   const [MenuList, setMenuList] = useState(null);
+  const [MenuNavigation, setMenuNavigation] = useState(null);
 
   const getMenu = async () => {
     const get = await axios.get('/storage/systems/menu_list.json');
@@ -67,18 +62,31 @@ const Authenticated = ({ auth, header, children }) => {
 
       menu.push(a);
     });
-
     setMenuList(await menu);
   };
 
+  const getNavigation = async () => {
+    const get = await axios.get('/storage/systems/menu_navigation.json');
+    const list = await get.data;
+    let menu = [];
+    list.map(a => {
+      a.id = nanoid();
+      a.href = route(a.href);
+      menu.push(a);
+    });
+    setMenuNavigation(await menu);
+  };
+
   useEffect(getMenu, []);
+  useEffect(getNavigation, [])
 
   return (
     <ChakraProvider>
       {!MenuList && <LoadingPage />}
       {MenuList && (
         <>
-          <Head title={(route().current()).charAt(0).toUpperCase() + (route().current()).slice(1)} /><div className="min-h-full">
+          <Head title={(route().current()).charAt(0).toUpperCase() + (route().current()).slice(1)} />
+          <div className="min-h-screen mx-auto">
             <Disclosure as="nav" className="bg-gray-800">
               {({ open }) => (
                 <>
@@ -105,7 +113,7 @@ const Authenticated = ({ auth, header, children }) => {
                               className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                             >
                               <span className="sr-only">View Message</span>
-                              <MailIcon className="h-6 w-6" aria-hidden="true" />
+                              <MailIcon className="h-6 w-6 animate-ping" aria-hidden="true" />
                             </button>
                             {/* Profile dropdown */}
                             <Menu as="div" className="ml-3 relative">
@@ -115,6 +123,7 @@ const Authenticated = ({ auth, header, children }) => {
                                   <img className="h-8 w-8 rounded-full" src={user.imageUrl} alt="" />
                                 </Menu.Button>
                               </div>
+                              {!MenuNavigation && (<>Notfound</>)}
                               <Transition
                                 as={Fragment}
                                 enter="transition ease-out duration-100"
@@ -125,7 +134,7 @@ const Authenticated = ({ auth, header, children }) => {
                                 leaveTo="transform opacity-0 scale-95"
                               >
                                 <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                  {userNavigation.map((item) => (
+                                  {MenuNavigation && MenuNavigation.map((item) => (
                                     <Menu.Item key={item.name}>
                                       {({ active }) => (
                                         <a
@@ -195,7 +204,7 @@ const Authenticated = ({ auth, header, children }) => {
                         </button>
                       </div>
                       <div className="mt-3 px-2 space-y-1">
-                        {userNavigation.map((item) => (
+                        {MenuNavigation && MenuNavigation.map((item) => (
                           <Disclosure.Button
                             key={item.name}
                             as="a"
